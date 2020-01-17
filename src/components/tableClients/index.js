@@ -10,9 +10,11 @@ import TableBody from '@material-ui/core/TableBody';
 import { withStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import Button from '@material-ui/core/Button';
+import history from '~/services/history';
 import api from '~/services/api';
 
-import { ButtonDelete } from './styles';
+import { ButtonDelete, ButtonCreate } from './styles';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
@@ -52,8 +54,16 @@ export default function TableClients() {
 
     return (
         <>
+            <ButtonCreate>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => history.push('/clientes/create')}
+                >
+                    Novo
+                </Button>
+            </ButtonCreate>{' '}
             <TableContainer>
-                {' '}
                 <Table>
                     <TableHead>
                         <TableRow>

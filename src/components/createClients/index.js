@@ -22,7 +22,7 @@ import {
     BotoesControll,
 } from './styles';
 
-export default function DetailsClient() {
+export default function CreateClient() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [telephone, setTelephone] = useState('');
