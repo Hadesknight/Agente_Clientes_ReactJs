@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -19,6 +19,8 @@ export default function SignIn() {
         dispatch(signInRequest(email, password));
     }
 
+    const signin = useSelector(state => state.auth.signedFailured);
+
     return (
         <MainContainer>
             <ImgAvatar />
@@ -36,6 +38,7 @@ export default function SignIn() {
                     name="email"
                     autoComplete="email"
                     autoFocus
+                    error={signin}
                     onChange={e => setEmail(e.target.value)}
                 />
                 <TextField
@@ -47,6 +50,7 @@ export default function SignIn() {
                     label="Password"
                     type="password"
                     id="password"
+                    error={signin}
                     autoComplete="current-password"
                     onChange={e => setPassword(e.target.value)}
                 />

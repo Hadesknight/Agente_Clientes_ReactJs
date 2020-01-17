@@ -73,37 +73,46 @@ export default function CreateClient({ id }) {
         }
     }
 
-    async function loadClients() {
-        try {
-            const response = await api.get(`/clients/${id}`);
+    useEffect(() => {
+        async function loadClients() {
+            try {
+                const response = await api.get(`/clients/${id}`);
 
-            setName(response.data.name);
-            setEmail(response.data.email);
-            setTelephone(response.data.telephone);
-            setCpf(response.data.cpf);
-            setProfession(response.data.profession);
-            setBirth_date(response.data.birth_date);
-            setStreet(response.data.street);
-            setNumber(response.data.number);
-            setDistrict(response.data.district);
-            setCity(response.data.city);
-            setState(response.data.state);
-            setCep(response.data.cep);
-        } catch (err) {
-            console.log(err);
+                setName(response.data.name);
+                setEmail(response.data.email);
+                setTelephone(response.data.telephone);
+                setCpf(response.data.cpf);
+                setProfession(response.data.profession);
+                setBirth_date(response.data.birth_date);
+                setStreet(response.data.street);
+                setNumber(response.data.number);
+                setDistrict(response.data.district);
+                setCity(response.data.city);
+                setState(response.data.state);
+                setCep(response.data.cep);
+            } catch (err) {
+                console.log(err);
+            }
         }
-    }
-
-    if (id) {
         loadClients();
-    }
+    }, [id]);
 
     async function Create_Client() {
         try {
             await api.post('/clients', payload);
             setErrorCreate(false);
+            history.push('/');
         } catch (err) {
             setErrorCreate(true);
+        }
+    }
+
+    async function UpdateCliente() {
+        try {
+            await api.put(`/clients/${id}`, payload);
+            history.push('/');
+        } catch (err) {
+            console.log(err.message);
         }
     }
 
@@ -241,7 +250,11 @@ export default function CreateClient({ id }) {
 
             <BotoesControll>
                 {id ? (
-                    <Button variant="contained" color="primary">
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => UpdateCliente()}
+                    >
                         Atualizar
                     </Button>
                 ) : (
