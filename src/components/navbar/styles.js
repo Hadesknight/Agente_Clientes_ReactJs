@@ -24,3 +24,9 @@ export const Logout = styled(Button)`
     font-size: 15px;
     font-weight: bold;
 `;
+
+export const Back = styled(Button)`
+    color: #fff !important;
+    font-size: 15px;
+    font-weight: bold;
+`;

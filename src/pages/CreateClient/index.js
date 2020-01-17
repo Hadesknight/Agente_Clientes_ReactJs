@@ -4,12 +4,12 @@ import { Container } from './styles';
 import Navbar from '~/components/navbar';
 import CreateClient from '~/components/createClients';
 
-export default function CreateClients() {
+export default function CreateClients({ match }) {
     return (
         <>
-            <Navbar />
+            <Navbar button="true" />
             <Container>
-                <CreateClient />
+                <CreateClient id={match.params.id} />
             </Container>
         </>
     );

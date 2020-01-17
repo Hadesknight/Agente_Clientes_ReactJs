@@ -10,6 +10,7 @@ import TableBody from '@material-ui/core/TableBody';
 import { withStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import UpdateIcon from '@material-ui/icons/Update';
 import Button from '@material-ui/core/Button';
 import history from '~/services/history';
 import api from '~/services/api';
@@ -58,7 +59,7 @@ export default function TableClients() {
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => history.push('/clientes/create')}
+                    onClick={() => history.push('/create')}
                 >
                     Novo
                 </Button>
@@ -76,6 +77,9 @@ export default function TableClients() {
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 Detalhes
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                                Atualizar
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 Deletar
@@ -98,6 +102,11 @@ export default function TableClients() {
                                 <StyledTableCell align="center">
                                     <Link to={`/clientes/${row.id}`}>
                                         <AddCircleIcon color="primary" />
+                                    </Link>
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    <Link to={`/create/${row.id}`}>
+                                        <UpdateIcon color="primary" />
                                     </Link>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">

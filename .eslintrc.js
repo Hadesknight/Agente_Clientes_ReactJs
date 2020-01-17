@@ -32,7 +32,9 @@ module.exports = {
         "no-console": ["error", { allow: ["tron"] }],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
-        "prefer-object-spread": "off"
+        "prefer-object-spread": "off",
+        "react/prop-types": "off",
+        "no-console": "off"
     },
     settings: {
         "import/resolver": {

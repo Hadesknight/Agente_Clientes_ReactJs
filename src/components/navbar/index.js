@@ -2,12 +2,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import AppBar from '@material-ui/core/AppBar';
-
 import Typography from '@material-ui/core/Typography';
-import { signOut } from '~/store/modules/auth/actions';
-import { Icon, Logout, Header } from './styles';
+import history from '~/services/history';
 
-export default function Navbar() {
+import { signOut } from '~/store/modules/auth/actions';
+import { Icon, Logout, Header, Back } from './styles';
+
+export default function Navbar({ button }) {
     const dispatch = useDispatch();
 
     function handleLogout() {
@@ -23,9 +24,16 @@ export default function Navbar() {
                         Agenda Clientes
                     </Typography>
                 </div>
-                <Logout color="#fff" onClick={() => handleLogout()}>
-                    Sair
-                </Logout>
+
+                {button ? (
+                    <Back color="#fff" onClick={() => history.push('/')}>
+                        Voltar
+                    </Back>
+                ) : (
+                        <Logout color="#fff" onClick={() => handleLogout()}>
+                            Sair
+                    </Logout>
+                    )}
             </Header>
         </AppBar>
     );

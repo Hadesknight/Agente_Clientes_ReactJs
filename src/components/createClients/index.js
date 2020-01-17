@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Button from '@material-ui/core/Button';
 
@@ -22,7 +22,7 @@ import {
     BotoesControll,
 } from './styles';
 
-export default function CreateClient() {
+export default function CreateClient({ id }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [telephone, setTelephone] = useState('');
@@ -73,6 +73,31 @@ export default function CreateClient() {
         }
     }
 
+    async function loadClients() {
+        try {
+            const response = await api.get(`/clients/${id}`);
+
+            setName(response.data.name);
+            setEmail(response.data.email);
+            setTelephone(response.data.telephone);
+            setCpf(response.data.cpf);
+            setProfession(response.data.profession);
+            setBirth_date(response.data.birth_date);
+            setStreet(response.data.street);
+            setNumber(response.data.number);
+            setDistrict(response.data.district);
+            setCity(response.data.city);
+            setState(response.data.state);
+            setCep(response.data.cep);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    if (id) {
+        loadClients();
+    }
+
     async function Create_Client() {
         try {
             await api.post('/clients', payload);
@@ -85,7 +110,7 @@ export default function CreateClient() {
     return (
         <Container>
             <Tittle>
-                <h1>Cadastrar Clientes</h1>
+                {id ? <h1>Atualizar Dados</h1> : <h1>Cadastrar Clientes</h1>}
             </Tittle>
             <Border />
 
@@ -105,7 +130,7 @@ export default function CreateClient() {
                         required
                         id="standard-required"
                         label="email"
-                        defaultValue={email}
+                        value={email}
                         onChange={e => setEmail(e.target.value)}
                         error={errorCreate}
                         helperText="Não pode repetir"
@@ -114,14 +139,14 @@ export default function CreateClient() {
                         required
                         id="standard-required"
                         label="Telefone (00) 0000-0000"
-                        defaultValue={telephone}
+                        value={telephone}
                         onChange={e => setTelephone(e.target.value)}
                     />
                     <CpfInput
                         required
                         id="standard-required"
                         label="Cpf 000.000.000-00"
-                        defaultValue={cpf}
+                        value={cpf}
                         onChange={e => setCpf(e.target.value)}
                         error={errorCreate}
                         helperText="Não pode repetir"
@@ -132,14 +157,14 @@ export default function CreateClient() {
                         required
                         id="standard-required"
                         label="Profissão"
-                        defaultValue={profession}
+                        value={profession}
                         onChange={e => setProfession(e.target.value)}
                     />
                     <BirthInput
                         required
                         id="standard-required"
                         label="Nascimento Ano-Mes-Dia"
-                        defaultValue={birth_date}
+                        value={birth_date}
                         onChange={e => setBirth_date(e.target.value)}
                     />
                 </div>
@@ -215,13 +240,20 @@ export default function CreateClient() {
             <Border />
 
             <BotoesControll>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => Create_Client()}
-                >
-                    Cadastrar
-                </Button>
+                {id ? (
+                    <Button variant="contained" color="primary">
+                        Atualizar
+                    </Button>
+                ) : (
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => Create_Client()}
+                        >
+                            Cadastrar
+                    </Button>
+                    )}
+
                 <Button
                     variant="contained"
                     color="primary"

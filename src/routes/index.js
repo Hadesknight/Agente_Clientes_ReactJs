@@ -12,12 +12,9 @@ export default function Routes() {
     return (
         <Switch>
             <Route path="/" exact component={Dashboard} isPrivate />
-            <Route path="/clientes" exact component={Clientes} isPrivate />
-            <Route
-                path="/clientes/create"
-                component={CreateClients}
-                isPrivate
-            />
+            <Route path="/clientes/:id" component={Clientes} isPrivate />
+            <Route path="/create/" exact component={CreateClients} isPrivate />
+            <Route path="/create/:id" component={CreateClients} isPrivate />
             <Route path="/login" component={SignIn} />
             <Route path="/register" component={SignUp} />
         </Switch>
