@@ -1,16 +1,15 @@
 import React from 'react';
 
 import { Container } from './styles';
-
 import Navbar from '~/components/navbar';
-import TableClients from '~/components/tableClients';
+import DetailsClient from '~/components/detailsClient';
 
-export default function Dashboard() {
+export default function Clientes() {
     return (
         <>
             <Navbar />
             <Container>
-                <TableClients />
+                <DetailsClient />
             </Container>
         </>
     );

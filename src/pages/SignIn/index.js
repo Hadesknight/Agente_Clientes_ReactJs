@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import { signInRequest } from '~/store/modules/auth/actions';
 
 import { MainContainer, ImgAvatar, Form, ButtonSubmit, Footer } from './styles';
 
 export default function SignIn() {
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    const dispatch = useDispatch();
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        dispatch(signInRequest(email, password));
+    }
+
     return (
         <MainContainer>
             <ImgAvatar />
@@ -24,6 +36,7 @@ export default function SignIn() {
                     name="email"
                     autoComplete="email"
                     autoFocus
+                    onChange={e => setEmail(e.target.value)}
                 />
                 <TextField
                     variant="outlined"
@@ -35,12 +48,14 @@ export default function SignIn() {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    onChange={e => setPassword(e.target.value)}
                 />
                 <ButtonSubmit
                     type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
+                    onClick={e => handleSubmit(e)}
                 >
                     Sign In
                 </ButtonSubmit>
@@ -54,15 +69,14 @@ export default function SignIn() {
                 </Grid>
             </Form>
             <Footer variant="body2" color="textSecondary" align="center">
-                <p>
-                    Developed by{' '}
-                    <Link
-                        color="inherit"
-                        href="https://www.linkedin.com/in/fernando-santos-686632122/"
-                    >
-                        Fernando Santos
-                    </Link>{' '}
-                </p>
+                Developed by{' '}
+                <Link
+                    color="inherit"
+                    href="https://www.linkedin.com/in/fernando-santos-686632122/"
+                >
+                    Fernando Santos
+                </Link>
+                {'  '}
                 {new Date().getFullYear()}.
             </Footer>
         </MainContainer>

@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import { signUpRequest } from '~/store/modules/auth/actions';
 
 import { MainContainer, ImgAvatar, Form, ButtonSubmit, Footer } from './styles';
 
 export default function SignIn() {
-    const [name, setName] = useState();
+    const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [password_confirmation, setPassword_confirmation] = useState();
 
-    const payload = { name, email, password, password_confirmation };
+    const dispatch = useDispatch();
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(payload);
+        const payload = { username, email, password, password_confirmation };
+        dispatch(signUpRequest(payload));
     }
 
     return (
@@ -34,9 +38,8 @@ export default function SignIn() {
                     id="name"
                     label="Name"
                     name="name"
-                    autoComplete="email"
                     autoFocus
-                    onChange={e => setName(e.target.value)}
+                    onChange={e => setUsername(e.target.value)}
                 />
                 <TextField
                     variant="outlined"
@@ -47,7 +50,6 @@ export default function SignIn() {
                     label="Email Address"
                     name="email"
                     type="email"
-                    autoFocus
                     onChange={e => setEmail(e.target.value)}
                 />
                 <TextField
